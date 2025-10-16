@@ -5,14 +5,14 @@ import {
   writeResponseToNodeResponse,
 } from '@angular/ssr/node';
 
-import { AngularAppEngine } from '@angular/ssr';
+import { AngularAppEngine, createRequestHandler} from '@angular/ssr';
 import { getContext } from '@netlify/angular-runtime/context.mjs';
 import express from 'express';
 import { join } from 'node:path';
 
 const angularAppEngine = new AngularAppEngine();
 
-export async function netlifyCommmonEngineHandler(request: Request ): Promise<Response> {
+export async function netlifyAppEngineHandler(request: Request ): Promise<Response> {
   const context = getContext();
 
   const result = await angularAppEngine.handle(request,context);
@@ -77,4 +77,4 @@ if (isMainModule(import.meta.url) || process.env['pm_id']) {
 /**
  * Request handler used by the Angular CLI (for dev-server and during build) or Firebase Cloud Functions.
  */
-export const reqHandler = createNodeRequestHandler(app);
+export const reqHandler = createRequestHandler(netlifyAppEngineHandler);
