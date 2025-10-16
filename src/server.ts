@@ -4,8 +4,20 @@ import {
   isMainModule,
   writeResponseToNodeResponse,
 } from '@angular/ssr/node';
+
+import { AngularAppEngine } from '@angular/ssr';
+import { getContext } from '@netlify/angular-runtime/context.mjs';
 import express from 'express';
 import { join } from 'node:path';
+
+const angularAppEngine = new AngularAppEngine();
+
+export async function netlifyCommmonEngineHandler(request: Request ): Promise<Response> {
+  const context = getContext();
+
+  const result = await angularAppEngine.handle(request,context);
+  return result || new Response('Not Found', {status: 404});
+}
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
