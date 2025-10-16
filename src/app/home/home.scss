@@ -1,0 +1,71 @@
+@mixin grotesk($weight) {
+
+    font-family: "Space Grotesk", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: $weight;
+    font-style: normal;
+}
+.container {
+    width:100%;
+    height:100%;
+    box-sizing: border-box;
+    display:flex;
+    flex-direction: column;
+}
+
+.header-container {
+    display:flex;
+    flex-direction: row;
+    background-color: white;
+    height: 50%;
+    padding-left:2rem;
+    padding-right: 2rem;
+}
+
+.header-text {
+    width:50%;
+    text-align: center;
+}
+
+.header-image {
+    width:50%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    // flex-direction: row;
+
+    #western-logo {
+        width: 30%;
+    }
+
+    #ieee-logo {
+        width:33%;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+}
+
+
+
+.title {
+    @include grotesk(700);
+    font-size: 3rem;
+    margin-left:auto;
+    margin-right:auto;
+    color:#4f2683;
+}
+
+.club-message {
+
+    @include grotesk(300);
+    font-size: 1.5rem;
+
+}
+
+body {
+    background-color: #9150e6;
+    padding-top: 8rem;
+}
